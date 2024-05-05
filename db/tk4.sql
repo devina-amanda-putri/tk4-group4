@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 08:54 AM
--- Server version: 8.0.34
--- PHP Version: 8.2.12
+-- Generation Time: May 05, 2024 at 03:59 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,17 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `barang` (
-  `IdBarang` int NOT NULL,
-  `IdSupplier` int DEFAULT NULL,
-  `IdPengguna` int DEFAULT NULL,
-  `NamaBarang` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `Keterangan` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `Satuan` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `IdBarang` int(11) NOT NULL,
+  `IdSupplier` int(11) DEFAULT NULL,
+  `IdPengguna` int(11) DEFAULT NULL,
+  `NamaBarang` varchar(200) DEFAULT NULL,
+  `Keterangan` text DEFAULT NULL,
+  `Satuan` varchar(255) DEFAULT NULL,
   `HargaSatuan` decimal(20,2) DEFAULT NULL,
-  `Stok` int DEFAULT NULL,
-  `JumlahMinimalBarang` int DEFAULT NULL,
-  `JumlahMaksimalBarang` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `Stok` int(11) DEFAULT NULL,
+  `JumlahMinimalBarang` int(11) DEFAULT NULL,
+  `JumlahMaksimalBarang` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `barang`
@@ -48,7 +48,8 @@ INSERT INTO `barang` (`IdBarang`, `IdSupplier`, `IdPengguna`, `NamaBarang`, `Ket
 (3, 9, NULL, 'Mouse', 'Mouse Portable', 'pcs', 15000.00, 6, 6, 9),
 (5, 2, 5, 'Aqua Botol', 'Aqua Botol Gede', 'Liter', 15000.00, NULL, NULL, NULL),
 (6, 2, 5, 'Sendok Makan', 'Sendok Makan', 'Lusin', 30000.00, NULL, NULL, NULL),
-(7, 1, 5, 'Garpu', 'Garpu', 'Lusin', 30000.00, NULL, NULL, NULL);
+(7, 1, 5, 'Garpu', 'Garpu', 'Lusin', 30000.00, NULL, NULL, NULL),
+(13, 10, NULL, 'Laptop', 'New', 'unit', 15000000.00, 5, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -57,10 +58,10 @@ INSERT INTO `barang` (`IdBarang`, `IdSupplier`, `IdPengguna`, `NamaBarang`, `Ket
 --
 
 CREATE TABLE `hakakses` (
-  `IdAkses` int NOT NULL,
+  `IdAkses` int(11) NOT NULL,
   `NamaAkses` varchar(100) DEFAULT NULL,
-  `Keterangan` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `Keterangan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `hakakses`
@@ -72,10 +73,10 @@ INSERT INTO `hakakses` (`IdAkses`, `NamaAkses`, `Keterangan`) VALUES
 (3, 'Seller', 'Seller'),
 (4, 'Buyer', 'Buyer'),
 (5, 'Analis', 'Analis'),
-(6, 'Guest', 'Guest'),
+(6, 'Pelanggan', 'Pelanggan'),
 (7, 'Manager', 'Manager'),
 (8, 'Warehouse', 'Warehouse'),
-(9, 'Goods', 'Goods Manager'),
+(9, 'Supplier', 'Supplier'),
 (10, 'Reseller', 'Reseller');
 
 -- --------------------------------------------------------
@@ -85,11 +86,11 @@ INSERT INTO `hakakses` (`IdAkses`, `NamaAkses`, `Keterangan`) VALUES
 --
 
 CREATE TABLE `pelanggan` (
-  `IdPelanggan` int NOT NULL,
+  `IdPelanggan` int(11) NOT NULL,
   `NamaPelanggan` varchar(200) DEFAULT NULL,
-  `AlamatPelanggan` text,
+  `AlamatPelanggan` text DEFAULT NULL,
   `NoTelp` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pelanggan`
@@ -112,13 +113,13 @@ INSERT INTO `pelanggan` (`IdPelanggan`, `NamaPelanggan`, `AlamatPelanggan`, `NoT
 --
 
 CREATE TABLE `pembelian` (
-  `IdPembelian` int NOT NULL,
-  `IdPengguna` int DEFAULT NULL,
-  `IdBarang` int DEFAULT NULL,
-  `IdPelanggan` int DEFAULT NULL,
-  `JumlahPembelian` int DEFAULT NULL,
+  `IdPembelian` int(11) NOT NULL,
+  `IdPengguna` int(11) DEFAULT NULL,
+  `IdBarang` int(11) DEFAULT NULL,
+  `IdPelanggan` int(11) DEFAULT NULL,
+  `JumlahPembelian` int(11) DEFAULT NULL,
   `HargaBeli` decimal(20,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pembelian`
@@ -135,15 +136,15 @@ INSERT INTO `pembelian` (`IdPembelian`, `IdPengguna`, `IdBarang`, `IdPelanggan`,
 --
 
 CREATE TABLE `pengguna` (
-  `IdPengguna` int NOT NULL,
-  `IdAkses` int DEFAULT NULL,
+  `IdPengguna` int(11) NOT NULL,
+  `IdAkses` int(11) DEFAULT NULL,
   `NamaPengguna` varchar(200) DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,
   `NamaDepan` varchar(100) DEFAULT NULL,
   `NamaBelakang` varchar(100) DEFAULT NULL,
   `NoHp` varchar(20) DEFAULT NULL,
-  `Alamat` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `Alamat` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pengguna`
@@ -151,8 +152,8 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`IdPengguna`, `IdAkses`, `NamaPengguna`, `Password`, `NamaDepan`, `NamaBelakang`, `NoHp`, `Alamat`) VALUES
 (1, 2, 'amanda', 'adm123', 'Amanda', 'Putri', '082178993475', 'Jakarta'),
-(2, 1, 'husna', 'husna123', 'Husna', 'Kahfi', '082264789090', 'Jakarta'),
-(3, 3, 'marry', 'marry123', 'Marry', 'Gosal', '081378901364', 'Jakarta'),
+(2, 9, 'husna', 'husna123', 'Husna', 'Kahfi', '082264789090', 'Jakarta'),
+(3, 6, 'marry', 'marry123', 'Marry', 'Gosal', '081378901364', 'Jakarta'),
 (4, 4, 'victor', 'victor123', 'Victorio', 'Margo', '080912673455', 'Tangerang'),
 (5, 3, 'jhon', 'jhon123', 'Jhon', 'Doe', '080923674422', 'Bandung'),
 (6, 4, 'karina', 'karina123', 'Karina', 'Blu', '081267428943', 'Banten');
@@ -164,13 +165,13 @@ INSERT INTO `pengguna` (`IdPengguna`, `IdAkses`, `NamaPengguna`, `Password`, `Na
 --
 
 CREATE TABLE `penjualan` (
-  `IdPenjualan` int NOT NULL,
-  `IdPengguna` int DEFAULT NULL,
-  `IdBarang` int DEFAULT NULL,
-  `IdPelanggan` int DEFAULT NULL,
-  `JumlahPenjualan` int DEFAULT NULL,
+  `IdPenjualan` int(11) NOT NULL,
+  `IdPengguna` int(11) DEFAULT NULL,
+  `IdBarang` int(11) DEFAULT NULL,
+  `IdPelanggan` int(11) DEFAULT NULL,
+  `JumlahPenjualan` int(11) DEFAULT NULL,
   `HargaJual` decimal(20,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `penjualan`
@@ -190,11 +191,11 @@ INSERT INTO `penjualan` (`IdPenjualan`, `IdPengguna`, `IdBarang`, `IdPelanggan`,
 --
 
 CREATE TABLE `supplier` (
-  `IdSupplier` int NOT NULL,
+  `IdSupplier` int(11) NOT NULL,
   `NamaSupplier` varchar(200) DEFAULT NULL,
-  `AlamatSupplier` text,
+  `AlamatSupplier` text DEFAULT NULL,
   `NoTelp` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `supplier`
@@ -275,43 +276,43 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `IdBarang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `IdBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `hakakses`
 --
 ALTER TABLE `hakakses`
-  MODIFY `IdAkses` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdAkses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `IdPelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `IdPelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `IdPembelian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `IdPengguna` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdPengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `IdPenjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `IdPenjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `IdSupplier` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IdSupplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -321,7 +322,7 @@ ALTER TABLE `supplier`
 -- Constraints for table `barang`
 --
 ALTER TABLE `barang`
-  ADD CONSTRAINT `Barang_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `pengguna` (`IdPengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Barang_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `pengguna` (`IdPengguna`),
   ADD CONSTRAINT `Barang_ibfk_2` FOREIGN KEY (`IdSupplier`) REFERENCES `supplier` (`IdSupplier`);
 
 --

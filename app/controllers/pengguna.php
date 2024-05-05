@@ -1,29 +1,21 @@
 <?php
 
-class Barang extends Controller
+class Pengguna extends Controller
 {
     public function index()
     {
-        $menu = 'barang';
+        $menu = 'pengguna';
 
         $status = isset($_GET['status']) ? $_GET['status'] : null;
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        $nama_barang = isset($_GET['nama_barang']) ? $_GET['nama_barang'] : null;
+        $nama_pengguna = isset($_GET['nama_pengguna']) ? $_GET['nama_pengguna'] : null;
 
-        $barang_model = $this->loadModel('BarangModel');
-        $data_barang = $barang_model->getAllBarang($nama_barang);
+        $pengguna_model = $this->loadModel('PenggunaModel');
+        $data_pengguna = $pengguna_model->getAllPengguna($nama_pengguna);
 
         require 'app/views/layouts/header.php';
-        if($_SESSION['hak_akses'] == 'Admin'){
-            require 'app/views/barang/index.php';
-            require 'app/views/layouts/navbar.php';
-        }else if($_SESSION['hak_akses'] == 'Supplier'){
-            require 'app/views/barang/index.php';
-            require 'app/views/layouts/navbar_supplier.php';
-        }else{
-            require 'app/views/dashboard/pelanggan.php';   
-            require 'app/views/layouts/navbar_pelanggan.php';
-        }
+        require 'app/views/layouts/navbar.php';
+        require 'app/views/pengguna/index.php';
         require 'app/views/layouts/footer.php';
     }
 
@@ -33,16 +25,8 @@ class Barang extends Controller
         $data_supplier = $supplier_model->getAllSupplier();
 
         require 'app/views/layouts/header.php';
-        if($_SESSION['hak_akses'] == 'Admin'){
-            require 'app/views/barang/add.php';
-            require 'app/views/layouts/navbar.php';
-        }else if($_SESSION['hak_akses'] == 'Supplier'){
-            require 'app/views/barang/add.php';
-            require 'app/views/layouts/navbar_supplier.php';
-        }else{
-            require 'app/views/dashboard/pelanggan.php';   
-            require 'app/views/layouts/navbar_pelanggan.php';
-        }
+        require 'app/views/layouts/navbar.php';
+        require 'app/views/barang/add.php';
         require 'app/views/layouts/footer.php';
     }
 

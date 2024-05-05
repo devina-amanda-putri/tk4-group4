@@ -11,7 +11,6 @@ class Application
     public function __construct()
     {
         $this->splitUrl();
-
         if (file_exists('./app/controllers/' . $this->url_controller . '.php')) {
             require './app/controllers/' . $this->url_controller . '.php';
             $this->url_controller = new $this->url_controller();
