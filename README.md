@@ -1,5 +1,5 @@
 # Introduction to Data and Information Management
-TK4 - Group 4
+TK4 - Group 6
 
 
 - #### Import database ke mysql
@@ -8,7 +8,7 @@ TK4 - Group 4
 
 - #### Clone project ke folder c:/xampp/htdocs/
 
-  git clone https://github.com/devina-amanda-putri/tk4-group4.git
+  git clone https://github.com/devina-amanda-putri/tk4-group6.git
 
 - #### Copy file config.php.example ke config.php
 

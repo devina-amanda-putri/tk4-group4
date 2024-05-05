@@ -1,6 +1,6 @@
 
 # Introduction to Data and Information Management
-TK4 - Group 4
+TK4 - Group 6
 
 #### Linear Programming 
 
