@@ -1,71 +1,45 @@
 <?php
 
-class Barang extends Controller
+class Supplier extends Controller
 {
     public function index()
     {
-        $menu = 'barang';
+        $menu = 'supplier';
 
         $status = isset($_GET['status']) ? $_GET['status'] : null;
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        $nama_barang = isset($_GET['nama_barang']) ? $_GET['nama_barang'] : null;
+        $nama_supplier = isset($_GET['nama_supplier']) ? $_GET['nama_supplier'] : null;
 
-        $barang_model = $this->loadModel('BarangModel');
-        $data_barang = $barang_model->getAllBarang($nama_barang);
+        $supplier_model = $this->loadModel('SupplierModel');
+        $data_supplier = $supplier_model->getAllSupplier($nama_supplier);
 
         require 'app/views/layouts/header.php';
-        if($_SESSION['hak_akses'] == 'Admin'){
-            require 'app/views/barang/index.php';
-            require 'app/views/layouts/navbar.php';
-        }else if($_SESSION['hak_akses'] == 'Supplier'){
-            require 'app/views/barang/index.php';
-            require 'app/views/layouts/navbar_supplier.php';
-        }else{
-            require 'app/views/dashboard/pelanggan.php';   
-            require 'app/views/layouts/navbar_pelanggan.php';
-        }
+        require 'app/views/layouts/navbar.php';
+        require 'app/views/supplier/index.php';
         require 'app/views/layouts/footer.php';
     }
 
     public function tambah()
     {
-        $supplier_model = $this->loadModel('SupplierModel');
-        $data_supplier = $supplier_model->getAllSupplier();
-
         require 'app/views/layouts/header.php';
-        if($_SESSION['hak_akses'] == 'Admin'){
-            require 'app/views/barang/add.php';
-            require 'app/views/layouts/navbar.php';
-        }else if($_SESSION['hak_akses'] == 'Supplier'){
-            require 'app/views/barang/add.php';
-            require 'app/views/layouts/navbar_supplier.php';
-        }else{
-            require 'app/views/dashboard/pelanggan.php';   
-            require 'app/views/layouts/navbar_pelanggan.php';
-        }
+        require 'app/views/layouts/navbar.php';
+        require 'app/views/supplier/add.php';
         require 'app/views/layouts/footer.php';
     }
 
     public function proses_tambah()
     {
         try {
-            if (isset($_POST["tambah_barang"])) {
-                $barang_model = $this->loadModel('BarangModel');
-                $barang_model->setIdPengguna(null);
-                $barang_model->setIdSupplier($_POST["IdSupplier"]);
-                $barang_model->setNamaBarang($_POST["NamaBarang"]);
-                $barang_model->setKeterangan($_POST["Keterangan"]);
-                $barang_model->setSatuan($_POST["Satuan"]);
-                $barang_model->setHargaSatuan($_POST["HargaSatuan"]);
-                $barang_model->setStok($_POST["Stok"]);
-                $barang_model->setJumlahMinimalBarang($_POST["JumlahMinimalBarang"]);
-                $barang_model->setJumlahMaksimalBarang($_POST["JumlahMaksimalBarang"]);
-                $barang_model->saveBarang();
-            }
-
-            header('location: ' . URL . 'barang?status=success&action=add');
+            if (isset($_POST["tambah_supplier"])) {
+                $supplier_model = $this->loadModel('SupplierModel');
+                $supplier_model->setNamaSupplier($_POST["NamaSupplier"]);
+                $supplier_model->setAlamatSupplier($_POST["Alamat"]);
+                $supplier_model->setNoTelp($_POST["NoTelp"]);
+                $supplier_model->saveSupplier();
+            }            
+            header('location: ' . URL . 'supplier?status=success&action=add');
         } catch (Exception $e) {
-            header('location: ' . URL . 'barang?status=error&action=edit');
+            header('location: ' . URL . 'supplier?status=error&action=edit');
         }
     }
 

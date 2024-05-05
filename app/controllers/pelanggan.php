@@ -14,17 +14,32 @@ class Pelanggan extends Controller
         $data_pelanggan = $pelanggan_model->getAllPelanggan($nama_pelanggan);
 
         require 'app/views/layouts/header.php';
-        require 'app/views/layouts/navbar.php';
-        require 'app/views/pelanggan/index.php';
+        if($_SESSION['hak_akses'] == 'Admin'){
+            require 'app/views/pelanggan/index.php';
+            require 'app/views/layouts/navbar.php';
+        }else if($_SESSION['hak_akses'] == 'Supplier'){
+            require 'app/views/pelanggan/index.php';
+            require 'app/views/layouts/navbar_supplier.php';
+        }else{
+            require 'app/views/dashboard/pelanggan.php';   
+            require 'app/views/layouts/navbar_pelanggan.php';
+        }
         require 'app/views/layouts/footer.php';
     }
 
     public function tambah()
     {
-
         require 'app/views/layouts/header.php';
-        require 'app/views/layouts/navbar.php';
-        require 'app/views/pelanggan/add.php';
+        if($_SESSION['hak_akses'] == 'Admin'){
+            require 'app/views/pelanggan/add.php';
+            require 'app/views/layouts/navbar.php';
+        }else if($_SESSION['hak_akses'] == 'Supplier'){
+            require 'app/views/pelanggan/add.php';
+            require 'app/views/layouts/navbar_supplier.php';
+        }else{
+            require 'app/views/dashboard/pelanggan.php';   
+            require 'app/views/layouts/navbar_pelanggan.php';
+        }
         require 'app/views/layouts/footer.php';
     }
 

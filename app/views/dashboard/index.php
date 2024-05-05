@@ -1,10 +1,8 @@
 <!-- Begin page content -->
 <main role="main" class="container">
     <div class="mt-5">
-        <h2>Dashboard</h2>
+        <h2>Dashboard <?php echo $_SESSION['hak_akses']; ?></h2>
     </div>
-
-
     <div class="row mt-5">
         <div class="col-sm-4">
             <div class="card">

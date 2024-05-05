@@ -14,10 +14,20 @@ if (isset($_SESSION['username'])) {
             $app = new Application();
             exit;
         case 'Supplier':
-            header('Location: supplier_home.php');
+            require 'app/config/config.php';
+            require 'app/libs/application.php';
+            require 'app/libs/controller.php';
+
+            $app = new Application();
+            // header('Location: supplier_home.php');
             exit;
         case 'Pelanggan':
-            header('Location: pelanggan_home.php');
+            require 'app/config/config.php';
+            require 'app/libs/application.php';
+            require 'app/libs/controller.php';
+
+            $app = new Application();
+            // header('Location: pelanggan_home.php');
             exit;
         default:
             echo "Invalid access level";
@@ -71,10 +81,20 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 $app = new Application();
                 exit;
             case 'Supplier':
-                header('Location: supplier_home.php');
+                require 'app/config/config.php';
+                require 'app/libs/application.php';
+                require 'app/libs/controller.php';
+
+                $app = new Application();
+                // header('Location: supplier_home.php');
                 exit;
             case 'Pelanggan':
-                header('Location: pelanggan_home.php');
+                require 'app/config/config.php';
+                require 'app/libs/application.php';
+                require 'app/libs/controller.php';
+
+                $app = new Application();
+                // header('Location: pelanggan_home.php');
                 exit;
             default:
                 echo "Invalid access level";

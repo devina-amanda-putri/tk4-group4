@@ -65,4 +65,18 @@ class SupplierModel
             throw $e;
         }
     }
+
+    public function saveSupplier()
+    {
+        try {
+            $query = "INSERT INTO Supplier (NamaSupplier, AlamatSupplier, NoTelp) VALUES (NamaSupplier, :AlamatSupplier, :NoTelp)";
+            $prepareDB = $this->db->prepare($query);
+            $prepareDB->bindParam(':NamaSupplier', $this->NamaSupplier);
+            $prepareDB->bindParam(':AlamatSupplier', $this->AlamatSupplier);
+            $prepareDB->bindParam(':NoTelp', $this->NoTelp);
+            $prepareDB->execute();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

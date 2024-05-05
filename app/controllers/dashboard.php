@@ -31,8 +31,16 @@ class DasborController extends Controller
 
         $menu = 'dashboard';
         require 'app/views/layouts/header.php';
-        require 'app/views/layouts/navbar.php';
-        require 'app/views/dashboard/index.php';
+        if($_SESSION['hak_akses'] == 'Admin'){
+            require 'app/views/dashboard/index.php';
+            require 'app/views/layouts/navbar.php';
+        }else if($_SESSION['hak_akses'] == 'Supplier'){
+            require 'app/views/dashboard/index.php';
+            require 'app/views/layouts/navbar_supplier.php';
+        }else{
+            require 'app/views/dashboard/pelanggan.php';   
+            require 'app/views/layouts/navbar_pelanggan.php';
+        }
         require 'app/views/layouts/footer.php';
     }
 }
