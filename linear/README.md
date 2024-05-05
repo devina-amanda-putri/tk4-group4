@@ -6,7 +6,10 @@ TK4 - Group 4
 
 #### Instalation :
 
+- #### Copy file Config.py.example ke file Config.py
 
+  cp linear/Config.py.example linear/Config.py
+  
 - #### Setup database & url di file Config.py
 
   linear/Config.py
