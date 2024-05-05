@@ -10,6 +10,10 @@ TK4 - Group 4
 
   git clone https://github.com/devina-amanda-putri/tk4-group4.git
 
+- #### Copy file config.php.example ke config.php
+
+  cp app/config/config.php.example app/config/config.php
+
 - #### Setup database & url di file config.php
 
   app/config/config.php
